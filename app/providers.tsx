@@ -18,4 +18,3 @@ function Providers({ children }: { children: React.ReactNode }) {
   );
 }
 export default Providers;
-import { ReactNode } from "react";
