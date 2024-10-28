@@ -23,7 +23,7 @@ function CreateProduct() {
             <FormInput
               type='text'
               name='name'
-              label='product name'
+              label='name'
               defaultValue={name}
             />
             <FormInput
@@ -37,14 +37,14 @@ function CreateProduct() {
           </div>
           <TextAreaInput
             name='description'
-            labelText='product description'
+            labelText='description'
             defaultValue={description}
           />
           <div className='mt-6'>
             <CheckboxInput name='featured' label='featured' />
           </div>
 
-          <SubmitButton text='Create Product' className='mt-8' />
+          <SubmitButton text='Create' className='mt-8' />
         </FormContainer>
       </div>
     </section>
