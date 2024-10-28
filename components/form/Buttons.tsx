@@ -5,6 +5,8 @@ import { useFormStatus } from "react-dom";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { LuTrash2, LuPenSquare } from "react-icons/lu";
+import { SignInButton } from "@clerk/nextjs";
+import { BsHandThumbsUp, BsFillHandThumbsUpFill } from "react-icons/bs";
 
 type btnSize = "default" | "lg" | "sm";
 
@@ -64,6 +66,42 @@ export const IconButton = ({ actionType }: { actionType: actionType }) => {
       className='p-2 cursor-pointer'
     >
       {pending ? <ReloadIcon className=' animate-spin' /> : renderIcon()}
+    </Button>
+  );
+};
+
+export const CardSignInButton = () => {
+  return (
+    <SignInButton mode='modal'>
+      <Button
+        type='button'
+        size='icon'
+        variant='outline'
+        className='p-2 cursor-pointer'
+        asChild
+      >
+        <BsHandThumbsUp />
+      </Button>
+    </SignInButton>
+  );
+};
+
+export const CardSubmitButton = ({ isFavorite }: { isFavorite: boolean }) => {
+  const { pending } = useFormStatus();
+  return (
+    <Button
+      type='submit'
+      size='icon'
+      variant='outline'
+      className=' p-2 cursor-pointer'
+    >
+      {pending ? (
+        <ReloadIcon className=' animate-spin' />
+      ) : isFavorite ? (
+        <BsFillHandThumbsUpFill />
+      ) : (
+        <BsHandThumbsUp />
+      )}
     </Button>
   );
 };

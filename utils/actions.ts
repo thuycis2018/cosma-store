@@ -6,6 +6,7 @@ import { imageSchema, productSchema, validateWithZodSchema } from "./schema";
 import { deleteImage, uploadImage } from "./supabase";
 import { revalidatePath } from "next/cache";
 import { get } from "http";
+import { create } from "domain";
 
 const renderError = (error: unknown): { message: string } => {
   console.log(error);
@@ -27,6 +28,9 @@ export const fetchFeaturedProducts = async () => {
     where: {
       featured: true,
     },
+    orderBy: {
+      price: "desc",
+    },
   });
   return products;
 };
@@ -40,7 +44,7 @@ export const fetchAllProducts = ({ search = "" }: { search: string }) => {
       ],
     },
     orderBy: {
-      createdAt: "desc",
+      price: "desc",
     },
   });
 };
@@ -110,7 +114,7 @@ export const deleteProductAction = async (prevState: { productId: string }) => {
     });
     await deleteImage(product.image);
     revalidatePath("/admin/products");
-    return { message: "product removed" };
+    return { message: "item removed" };
   } catch (error) {
     return renderError(error);
   }
@@ -179,4 +183,60 @@ export const updateProductImageAction = async (
   } catch (error) {
     return renderError(error);
   }
+};
+
+export const fetchFavoriteId = async ({ productId }: { productId: string }) => {
+  const user = await getAuthUser();
+  const favorite = await db.favorite.findFirst({
+    where: {
+      productId,
+      clerkId: user.id,
+    },
+    select: {
+      id: true,
+    },
+  });
+  return favorite?.id || null;
+};
+
+export const toggleFavoriteAction = async (prevState: {
+  productId: string;
+  favoriteId: string | null;
+  pathname: string;
+}) => {
+  const user = await getAuthUser();
+  const { productId, favoriteId, pathname } = prevState;
+  try {
+    if (favoriteId) {
+      await db.favorite.delete({
+        where: {
+          id: favoriteId,
+        },
+      });
+    } else {
+      await db.favorite.create({
+        data: {
+          productId,
+          clerkId: user.id,
+        },
+      });
+    }
+    revalidatePath(pathname);
+    return { message: favoriteId ? "Removed from Faves" : "Added to Faves" };
+  } catch (error) {
+    return renderError(error);
+  }
+};
+
+export const fetchUserFavorites = async () => {
+  const user = await getAuthUser();
+  const favorites = await db.favorite.findMany({
+    where: {
+      clerkId: user.id,
+    },
+    include: {
+      product: true,
+    },
+  });
+  return favorites;
 };
