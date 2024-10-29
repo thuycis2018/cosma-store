@@ -56,7 +56,8 @@
 //     }, "File must be an image");
 // }
 
-import { z, ZodSchema } from "zod";
+import { comment } from "postcss";
+import { coerce, number, object, string, z, ZodSchema } from "zod";
 
 export const productSchema = z.object({
   name: z
