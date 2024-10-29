@@ -15,7 +15,7 @@ function CartItemsList({ cartItems }: { cartItems: CartItemWithProduct[] }) {
             className='flex flex-col gap-y-4 md:flex-row flex-wrap p-6 mb-8 gap-x-4'
           >
             <FirstColumn image={image} name={name} />
-            <SecondColumn name={name} company={company} productId={productId} />
+            <SecondColumn name={name} productId={productId} />
             <ThirdColumn id={id} quantity={amount} />
             <FourthColumn price={price} />
           </Card>
