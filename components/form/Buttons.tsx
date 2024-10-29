@@ -7,6 +7,7 @@ import { cn } from "@/lib/utils";
 import { LuTrash2, LuPenSquare } from "react-icons/lu";
 import { SignInButton } from "@clerk/nextjs";
 import { BsHandThumbsUp, BsFillHandThumbsUpFill } from "react-icons/bs";
+import { type } from "os";
 
 type btnSize = "default" | "lg" | "sm";
 
@@ -103,5 +104,15 @@ export const CardSubmitButton = ({ isFavorite }: { isFavorite: boolean }) => {
         <BsHandThumbsUp />
       )}
     </Button>
+  );
+};
+
+export const ProductSignInButton = () => {
+  return (
+    <SignInButton mode='modal'>
+      <Button type='button' size='default' className='mt-8'>
+        Please Sign In
+      </Button>
+    </SignInButton>
   );
 };
