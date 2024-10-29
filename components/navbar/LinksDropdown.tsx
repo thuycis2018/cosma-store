@@ -13,7 +13,6 @@ import UserIcon from "./UserIcon";
 import SignOutLink from "./SignOutLink";
 import { SignInButton, SignUpButton, SignedIn, SignedOut } from "@clerk/nextjs";
 import { auth } from "@clerk/nextjs/server";
-import { env } from "process";
 
 function LinksDropdown() {
   const { userId } = auth();
@@ -28,12 +27,23 @@ function LinksDropdown() {
       </DropdownMenuTrigger>
       <DropdownMenuContent className='w-48' align='start' sideOffset={10}>
         <SignedOut>
+          <DropdownMenuItem key='about'>
+            <Link href='/about' className='capitalize w-full'>
+              About
+            </Link>
+          </DropdownMenuItem>
+          <DropdownMenuItem key='products'>
+            <Link href='/products' className='capitalize w-full'>
+              Products
+            </Link>
+          </DropdownMenuItem>
+          <DropdownMenuSeparator />
           <DropdownMenuItem>
             <SignInButton mode='modal'>
               <button className='w-full text-left'>Login</button>
             </SignInButton>
           </DropdownMenuItem>
-          <DropdownMenuSeparator />
+
           <DropdownMenuItem>
             <SignUpButton mode='modal'>
               <button className='w-full text-left'>Register</button>
