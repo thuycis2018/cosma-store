@@ -22,4 +22,26 @@ function LoadingProduct() {
     </Card>
   );
 }
+
+export function LoadingProductDetail() {
+  return (
+    <div className='pt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-2'>
+      <Card>
+        <CardContent className='p-4'>
+          <Skeleton className='h-96 w-full' />
+        </CardContent>
+      </Card>
+      <Card>
+        <CardContent className='p-4'>
+          <Skeleton className='h-4 w-3/4 mt-4' />
+          <Skeleton className='h-4 w-3/4 mt-4' />
+          <Skeleton className='h-4 w-1/4 mt-4' />
+          <Skeleton className='h-4 w-3/4 mt-4' />
+          <Skeleton className='h-4 w-3/4 mt-4' />
+          <Skeleton className='h-4 w-1/4 mt-4' />
+        </CardContent>
+      </Card>
+    </div>
+  );
+}
 export default LoadingContainer;
