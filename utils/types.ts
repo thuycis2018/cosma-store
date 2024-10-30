@@ -10,7 +10,7 @@ export type CartItem = {
   image: string;
   title: string;
   price: string;
-  amount: number;
+  quantity: number;
   company: string;
 };
 

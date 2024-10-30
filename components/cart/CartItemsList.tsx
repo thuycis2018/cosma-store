@@ -7,7 +7,7 @@ function CartItemsList({ cartItems }: { cartItems: CartItemWithProduct[] }) {
   return (
     <div>
       {cartItems.map((cartItem) => {
-        const { id, amount } = cartItem;
+        const { id, quantity } = cartItem;
         const { id: productId, image, name, company, price } = cartItem.product;
         return (
           <Card
@@ -16,7 +16,7 @@ function CartItemsList({ cartItems }: { cartItems: CartItemWithProduct[] }) {
           >
             <FirstColumn image={image} name={name} />
             <SecondColumn name={name} productId={productId} />
-            <ThirdColumn id={id} quantity={amount} />
+            <ThirdColumn id={id} quantity={quantity} />
             <FourthColumn price={price} />
           </Card>
         );

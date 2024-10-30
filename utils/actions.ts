@@ -420,11 +420,11 @@ export const fetchOrCreateCart = async ({
 const updateOrCreateCartItem = async ({
   productId,
   cartId,
-  amount,
+  quantity,
 }: {
   productId: string;
   cartId: string;
-  amount: number;
+  quantity: number;
 }) => {
   let cartItem = await db.cartItem.findFirst({
     where: {
@@ -439,12 +439,12 @@ const updateOrCreateCartItem = async ({
         id: cartItem.id,
       },
       data: {
-        amount: cartItem.amount + amount,
+        quantity: cartItem.quantity + quantity,
       },
     });
   } else {
     cartItem = await db.cartItem.create({
-      data: { amount, productId, cartId },
+      data: { quantity, productId, cartId },
     });
   }
 };
@@ -466,8 +466,8 @@ export const updateCart = async (cart: Cart) => {
   let cartTotal = 0;
 
   for (const item of cartItems) {
-    numItemsInCart += item.amount;
-    cartTotal += item.amount * item.product.price;
+    numItemsInCart += item.quantity;
+    cartTotal += item.quantity * item.product.price;
   }
   const tax = cart.taxRate * cartTotal;
   const shipping = cartTotal ? cart.shipping : 0;
@@ -493,10 +493,10 @@ export const addToCartAction = async (prevState: any, formData: FormData) => {
   const user = await getAuthUser();
   try {
     const productId = formData.get("productId") as string;
-    const amount = Number(formData.get("amount"));
+    const quantity = Number(formData.get("quantity"));
     await fetchProduct(productId);
     const cart = await fetchOrCreateCart({ userId: user.id });
-    await updateOrCreateCartItem({ productId, cartId: cart.id, amount });
+    await updateOrCreateCartItem({ productId, cartId: cart.id, quantity });
     await updateCart(cart);
   } catch (error) {
     return renderError(error);
@@ -531,10 +531,10 @@ export const removeCartItemAction = async (
 };
 
 export const updateCartItemAction = async ({
-  amount,
+  quantity,
   cartItemId,
 }: {
-  amount: number;
+  quantity: number;
   cartItemId: string;
 }) => {
   const user = await getAuthUser();
@@ -550,7 +550,7 @@ export const updateCartItemAction = async ({
         cartId: cart.id,
       },
       data: {
-        amount,
+        quantity,
       },
     });
     await updateCart(cart);

@@ -34,7 +34,7 @@ export const POST = async (req: NextRequest) => {
   }
   const line_items = cart.cartItems.map((cartItem) => {
     return {
-      quantity: cartItem.amount,
+      quantity: cartItem.quantity,
       price_data: {
         currency: "usd",
         product_data: {

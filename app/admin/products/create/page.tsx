@@ -6,40 +6,21 @@ import { createProductAction } from "@/utils/actions";
 import ImageInput from "@/components/form/ImageInput";
 import PriceInput from "@/components/form/PriceInput";
 import TextAreaInput from "@/components/form/TextAreaInput";
-import { faker } from "@faker-js/faker";
 import CheckboxInput from "@/components/form/CheckboxInput";
 
 function CreateProduct() {
-  const name = faker.commerce.productName();
-  const company = faker.company.name();
-  const description = faker.lorem.paragraph({ min: 10, max: 12 });
-
   return (
     <section>
       <h1 className='text-2xl font-semibold mb-8 capitalize'>create product</h1>
       <div className='border p-8 rounded-md'>
         <FormContainer action={createProductAction}>
           <div className='grid gap-4 md:grid-cols-2 my-4'>
-            <FormInput
-              type='text'
-              name='name'
-              label='name'
-              defaultValue={name}
-            />
-            <FormInput
-              type='text'
-              name='company'
-              label='company'
-              defaultValue={company}
-            />
+            <FormInput type='text' name='name' label='name' />
+            <FormInput type='text' name='company' label='company' />
             <PriceInput />
             <ImageInput />
           </div>
-          <TextAreaInput
-            name='description'
-            labelText='description'
-            defaultValue={description}
-          />
+          <TextAreaInput name='description' labelText='description' />
           <div className='mt-6'>
             <CheckboxInput name='featured' label='featured' />
           </div>
