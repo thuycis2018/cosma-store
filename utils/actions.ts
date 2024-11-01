@@ -13,6 +13,7 @@ import { revalidatePath } from "next/cache";
 import { Cart } from "@prisma/client";
 import { create } from "domain";
 import { get } from "http";
+import { logEvent } from "../lib/ga";
 
 const renderError = (error: unknown): { message: string } => {
   console.log(error);
@@ -498,6 +499,10 @@ export const addToCartAction = async (prevState: any, formData: FormData) => {
     const cart = await fetchOrCreateCart({ userId: user.id });
     await updateOrCreateCartItem({ productId, cartId: cart.id, quantity });
     await updateCart(cart);
+    // GA
+    logEvent("add_to-cart", "shopping", {
+      label: "Add-To-Cart Button",
+    });
   } catch (error) {
     return renderError(error);
   }

@@ -1,12 +1,14 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import "./globals.css";
-import Navbar from "@/components/navbar/Navbar";
-import Container from "@/components/global/Container";
 import Providers from "./providers";
 import { ClerkProvider } from "@clerk/nextjs";
+import Navbar from "@/components/navbar/Navbar";
+import ClientAnalytics from "@/components/global/ClientAnalytics";
+import Container from "@/components/global/Container";
 import Footer from "@/components/navbar/Footer";
+import "./globals.css";
 
+const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || "";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -26,6 +28,7 @@ export default function RootLayout({
           <Providers>
             <Navbar />
             <Container className='py-20'>{children}</Container>
+            <ClientAnalytics />
             <Footer />
           </Providers>
         </body>
