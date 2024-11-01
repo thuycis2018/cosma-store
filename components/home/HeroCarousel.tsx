@@ -7,11 +7,10 @@ import {
 } from "@/components/ui/carousel";
 import { Card, CardContent } from "@/components/ui/card";
 import Image from "next/image";
-import hero1 from "@/app/hero1.jpg";
-import hero2 from "@/app/hero2.jpg";
-import hero3 from "@/app/hero3.jpg";
+import hero1 from "@/app/slider1.svg";
+import hero2 from "@/app/slider2.svg";
 
-const carouselImages = [hero1, hero2, hero3];
+const carouselImages = [hero1, hero2];
 
 function HeroCarousel() {
   return (
