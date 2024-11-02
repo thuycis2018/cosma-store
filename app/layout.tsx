@@ -4,16 +4,16 @@ import Providers from "./providers";
 import { ClerkProvider } from "@clerk/nextjs";
 import Navbar from "@/components/navbar/Navbar";
 import ClientAnalytics from "@/components/global/ClientAnalytics";
+import GTM from "@/components/global/GTM";
 import Container from "@/components/global/Container";
 import Footer from "@/components/navbar/Footer";
 import "./globals.css";
 
-const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || "";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "FPGA Design Services - Cosma Services LLC",
-  description: "FPGA Design Services",
+  title: "Online Store",
+  description: "FPGA Design Services - Cosma Services LLC",
 };
 
 export default function RootLayout({
@@ -24,22 +24,7 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang='en' suppressHydrationWarning>
-        <head>
-          <script
-            async
-            src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID}`}
-          />
-          <script
-            dangerouslySetInnerHTML={{
-              __html: `
-                window.dataLayer = window.dataLayer || [];
-                function gtag(){dataLayer.push(arguments);}
-                gtag('js', new Date());
-                gtag('config', '${process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID}', { send_page_view: false });
-              `,
-            }}
-          />
-        </head>
+        <GTM />
         <body className={inter.className}>
           <Providers>
             <Navbar />
