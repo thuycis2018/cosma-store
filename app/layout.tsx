@@ -4,7 +4,6 @@ import Providers from "./providers";
 import { ClerkProvider } from "@clerk/nextjs";
 import Navbar from "@/components/navbar/Navbar";
 import ClientAnalytics from "@/components/global/ClientAnalytics";
-import GTM from "@/components/global/GTM";
 import Container from "@/components/global/Container";
 import Footer from "@/components/navbar/Footer";
 import "./globals.css";
@@ -24,7 +23,22 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang='en' suppressHydrationWarning>
-        <GTM />
+        <head>
+          <script
+            async
+            src={`https://www.googletagmanager.com/gtm.js?id=${process.env.NEXT_PUBLIC_GTM_ID}`}
+          ></script>
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', '${process.env.NEXT_PUBLIC_GTM_ID}');
+            `,
+            }}
+          />
+        </head>
         <body className={inter.className}>
           <Providers>
             <Navbar />
