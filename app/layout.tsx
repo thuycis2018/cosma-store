@@ -29,13 +29,16 @@ export default function RootLayout({
               __html: `
               window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments);}
-              gtag('consent', 'default', {
-                'ad_storage': 'denied',
-                'ad_user_data': 'denied',
-                'ad_personalization': 'denied',
-                'analytics_storage': 'denied'
-              });              
-              gtag('config', '${process.env.NEXT_PUBLIC_GTM_ID}');
+              if(localStorage.getItem('consentMode') === null){
+                gtag('consent', 'default', {
+                  'ad_storage': 'denied',
+                  'ad_user_data': 'denied',
+                  'ad_personalization': 'denied',
+                  'analytics_storage': 'denied'
+                  }); 
+              }else{
+                gtag('consent', 'default', JSON.parse(localStorage.getItem('consentMode')));
+              }
             `,
             }}
           />
@@ -44,6 +47,27 @@ export default function RootLayout({
             async
             src={`https://www.googletagmanager.com/gtm.js?id=${process.env.NEXT_PUBLIC_GTM_ID}`}
           ></script>
+
+          {/* <script
+            async
+            src={`https://www.googletagmanager.com/gtag/js?id= ${process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID}`}
+          ></script>
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+
+              gtag('js', new Date());
+              gtag('config', ${process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID});
+            `,
+            }}
+          /> */}
+
+          {/* <script
+            async
+            src={`https://www.googletagmanager.com/gtm.js?id=${process.env.NEXT_PUBLIC_GTM_ID}`}
+          ></script> */}
         </head>
         <body className={inter.className}>
           <Providers>

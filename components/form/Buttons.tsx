@@ -7,7 +7,6 @@ import { cn } from "@/lib/utils";
 import { LuTrash2, LuPenSquare } from "react-icons/lu";
 import { SignInButton } from "@clerk/nextjs";
 import { BsHandThumbsUp, BsFillHandThumbsUpFill } from "react-icons/bs";
-import { type } from "os";
 
 type btnSize = "default" | "lg" | "sm";
 
@@ -81,7 +80,7 @@ export const CardSignInButton = () => {
         className='p-2 cursor-pointer'
         asChild
       >
-        {/* <BsHandThumbsUp /> */}
+        <BsHandThumbsUp />
       </Button>
     </SignInButton>
   );
@@ -102,8 +101,7 @@ export const CardSubmitButton = ({ isFavorite }: { isFavorite: boolean }) => {
       ) : isFavorite ? (
         <BsFillHandThumbsUpFill />
       ) : (
-        // <BsHandThumbsUp />
-        ``
+        <BsHandThumbsUp />
       )}
     </Button>
   );

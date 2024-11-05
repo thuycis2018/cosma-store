@@ -1,43 +1,92 @@
 "use client";
-import { useEffect, useState } from "react";
-import Cookies from "js-cookie";
-import { applyGtagConsent } from "../../lib/ga";
-
+import { useState, useEffect } from "react";
 interface ConsentState {
-  necessary: boolean;
-  analytics: boolean;
-  preferences: boolean;
-  marketing: boolean;
+  ad_storage: string;
+  ad_user_data: string;
+  ad_personalization: string;
+  analytics_storage: string;
+  personalization_storage: string;
+  functionality_storage: string;
+  security_storage: string;
 }
 
 export default function ConsentBanner() {
   const [consent, setConsent] = useState<ConsentState>({
+    ad_storage: "denied",
+    ad_user_data: "denied",
+    ad_personalization: "denied",
+    analytics_storage: "denied",
+    personalization_storage: "denied",
+    functionality_storage: "granted",
+    security_storage: "granted",
+  });
+
+  const [checkboxState, setCheckboxState] = useState({
     necessary: true,
     analytics: false,
-    preferences: false,
     marketing: false,
+    preferences: false,
   });
+
   const [isBannerVisible, setIsBannerVisible] = useState(true);
 
   useEffect(() => {
-    const savedConsent = Cookies.get("consent");
+    const savedConsent = localStorage.getItem("consentMode");
     if (savedConsent) {
+      const parsedConsent = JSON.parse(savedConsent);
+      setConsent(parsedConsent);
+      setCheckboxState({
+        necessary:
+          parsedConsent.functionality_storage === "granted" &&
+          parsedConsent.security_storage === "granted",
+        analytics: parsedConsent.analytics_storage === "granted",
+        marketing:
+          parsedConsent.ad_storage === "granted" ||
+          parsedConsent.ad_user_data === "granted" ||
+          parsedConsent.ad_personalization === "granted",
+        preferences: parsedConsent.personalization_storage === "granted",
+      });
       setIsBannerVisible(false);
     }
   }, []);
 
-  const handleCheckboxChange = (type: keyof ConsentState) => {
-    if (type !== "necessary") {
-      setConsent((prev) => ({ ...prev, [type]: !prev[type] }));
-    }
+  const handleCheckboxChange = (type: keyof typeof checkboxState) => {
+    setCheckboxState((prev) => {
+      const updatedCheckboxState = { ...prev, [type]: !prev[type] };
+
+      // Map checkbox states to consent types
+      const newConsent: ConsentState = {
+        ad_storage: updatedCheckboxState.marketing ? "granted" : "denied",
+        ad_user_data: updatedCheckboxState.marketing ? "granted" : "denied",
+        ad_personalization: updatedCheckboxState.marketing
+          ? "granted"
+          : "denied",
+        analytics_storage: updatedCheckboxState.analytics
+          ? "granted"
+          : "denied",
+        personalization_storage: updatedCheckboxState.preferences
+          ? "granted"
+          : "denied",
+        functionality_storage: updatedCheckboxState.necessary
+          ? "granted"
+          : "denied",
+        security_storage: updatedCheckboxState.necessary ? "granted" : "denied",
+      };
+
+      setConsent(newConsent);
+      return updatedCheckboxState;
+    });
   };
 
   const acceptAll = () => {
-    const fullConsent = {
-      necessary: true,
-      analytics: true,
-      preferences: true,
-      marketing: true,
+    const fullConsent: ConsentState = {
+      ad_storage: "granted",
+      ad_user_data: "granted",
+      ad_personalization: "granted",
+      analytics_storage: "granted",
+      personalization_storage: "granted",
+      functionality_storage: "granted",
+      security_storage: "granted",
     };
     saveConsent(fullConsent);
   };
@@ -47,22 +96,26 @@ export default function ConsentBanner() {
   };
 
   const rejectAll = () => {
-    const minimalConsent = {
-      necessary: true,
-      analytics: false,
-      preferences: false,
-      marketing: false,
+    const minimalConsent: ConsentState = {
+      ad_storage: "denied",
+      ad_user_data: "denied",
+      ad_personalization: "denied",
+      analytics_storage: "denied",
+      personalization_storage: "denied",
+      functionality_storage: "granted",
+      security_storage: "granted",
     };
     saveConsent(minimalConsent);
   };
 
   const saveConsent = (newConsent: ConsentState) => {
-    Cookies.set("consent", JSON.stringify(newConsent), {
-      expires: 365,
-      path: "/",
-    });
-    applyGtagConsent();
+    localStorage.setItem("consentMode", JSON.stringify(newConsent));
+    applyGtagConsent(newConsent);
     setIsBannerVisible(false);
+  };
+
+  const applyGtagConsent = (newConsent: ConsentState) => {
+    window.gtag("consent", "update", newConsent);
   };
 
   return (
@@ -75,16 +128,16 @@ export default function ConsentBanner() {
           <div className='flex items-center'>
             <input
               type='checkbox'
-              checked={consent.necessary}
-              disabled
-              className='mr-2 cursor-not-allowed'
+              checked={checkboxState.necessary}
+              onChange={() => handleCheckboxChange("necessary")}
+              className='mr-2'
             />
             <label className='text-xs'>Necessary</label>
           </div>
           <div className='flex items-center'>
             <input
               type='checkbox'
-              checked={consent.analytics}
+              checked={checkboxState.analytics}
               onChange={() => handleCheckboxChange("analytics")}
               className='mr-2'
             />
@@ -93,20 +146,20 @@ export default function ConsentBanner() {
           <div className='flex items-center'>
             <input
               type='checkbox'
-              checked={consent.preferences}
-              onChange={() => handleCheckboxChange("preferences")}
-              className='mr-2'
-            />
-            <label className='text-xs'>Preferences</label>
-          </div>
-          <div className='flex items-center'>
-            <input
-              type='checkbox'
-              checked={consent.marketing}
+              checked={checkboxState.marketing}
               onChange={() => handleCheckboxChange("marketing")}
               className='mr-2'
             />
             <label className='text-xs'>Marketing</label>
+          </div>
+          <div className='flex items-center'>
+            <input
+              type='checkbox'
+              checked={checkboxState.preferences}
+              onChange={() => handleCheckboxChange("preferences")}
+              className='mr-2'
+            />
+            <label className='text-xs'>Preferences</label>
           </div>
         </form>
         <div className='flex justify-center gap-2 text-xs'>
