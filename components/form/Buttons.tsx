@@ -81,7 +81,7 @@ export const CardSignInButton = () => {
         className='p-2 cursor-pointer'
         asChild
       >
-        <BsHandThumbsUp />
+        {/* <BsHandThumbsUp /> */}
       </Button>
     </SignInButton>
   );
@@ -95,13 +95,15 @@ export const CardSubmitButton = ({ isFavorite }: { isFavorite: boolean }) => {
       size='icon'
       variant='outline'
       className=' p-2 cursor-pointer'
+      suppressHydrationWarning
     >
       {pending ? (
         <ReloadIcon className=' animate-spin' />
       ) : isFavorite ? (
         <BsFillHandThumbsUpFill />
       ) : (
-        <BsHandThumbsUp />
+        // <BsHandThumbsUp />
+        ``
       )}
     </Button>
   );

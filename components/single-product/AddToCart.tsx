@@ -11,6 +11,7 @@ import { ProductSignInButton } from "../form/Buttons";
 function AddToCart({ productId }: { productId: string }) {
   const [quantity, setQuantity] = useState(1);
   const { userId } = useAuth();
+
   return (
     <div className='mt-4'>
       <SelectProductQuantity
