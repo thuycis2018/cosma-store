@@ -27,6 +27,29 @@ const getAuthUser = async () => {
   return user;
 };
 
+export const fetchAllBlogs = ({ search = "" }: { search: string }) => {
+  return db.blog.findMany({
+    where: {
+      OR: [{ title: { contains: search, mode: "insensitive" } }],
+    },
+    orderBy: {
+      createdAt: "desc",
+    },
+  });
+};
+
+export const fetchSingleBlog = async (blogId: string) => {
+  const blog = await db.blog.findUnique({
+    where: {
+      id: blogId,
+    },
+  });
+  if (!blog) {
+    redirect("/blogs");
+  }
+  return blog;
+};
+
 export const fetchFeaturedProducts = async () => {
   const products = await db.product.findMany({
     where: {

@@ -1,5 +1,4 @@
 import { createClient } from "@supabase/supabase-js";
-import { split } from "postcss/lib/list";
 
 const bucket = "cosma_store";
 

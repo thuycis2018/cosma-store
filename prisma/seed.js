@@ -1,14 +1,30 @@
 /* eslint-disable @typescript-eslint/no-require-imports */
-// run node prisma/seed.js
+// run and pass in argument for tableName
+// node prisma/seed.js blogs
 const { PrismaClient } = require('@prisma/client');
-const products = require('./products.json');
 const prisma = new PrismaClient();
+const items = require('./blogs.json');
+const tableName = process.argv[2];
+
+if (tableName === 'products') {
+    items = require('./products.json');
+}
 
 async function main() {
-    for (const product of products) {
-        await prisma.product.create({
-            data: product,
-        });
+    switch (tableName) {
+        case 'products':
+            await prisma.product.createMany({
+                data: items,
+            });
+            break;
+        case 'blogs':
+            await prisma.blog.createMany({
+                data: items,
+            });
+            break;
+        default:
+            console.error('invalid table name provided');
+            break;
     }
 }
 main()
