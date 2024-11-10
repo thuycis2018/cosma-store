@@ -21,7 +21,7 @@ function Hero() {
           <Link href='/products'>Our Offers</Link>
         </Button>
       </div>
-      <HeroCarousel />
+      <HeroCarousel data-testid='hero-carousel' />
     </section>
   );
 }
