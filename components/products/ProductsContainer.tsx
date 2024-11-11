@@ -1,5 +1,5 @@
-import ProductsGrid from "./ProductsGrid";
-import ProductsList from "./ProductsList";
+import ProductsGrid from "@/components/products/ProductsGrid";
+import ProductsList from "@/components/products/ProductsList";
 import { LuLayoutGrid, LuList } from "react-icons/lu";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
@@ -7,8 +7,8 @@ import { fetchAllProducts } from "@/utils/actions";
 import Link from "next/link";
 
 async function ProductsContainer({
-  layout,
-  search,
+  layout = "grid",
+  search = "",
 }: {
   layout: string;
   search: string;
@@ -30,17 +30,27 @@ async function ProductsContainer({
               size='icon'
               asChild
             >
-              <Link href={`/products?layout=grid${searchTerm}`}>
-                <LuLayoutGrid />
+              <Link
+                href={`/products?layout=grid${searchTerm}`}
+                data-testid='grid-link'
+              >
+                <LuLayoutGrid
+                  aria-label='Grid layout'
+                  data-testid='grid-button'
+                />
               </Link>
             </Button>
             <Button
               variant={layout === "list" ? "default" : "ghost"}
               size='icon'
               asChild
+              data-testid='list-button'
             >
-              <Link href={`/products?layout=list${searchTerm}`}>
-                <LuList />
+              <Link
+                href={`/products?layout=list${searchTerm}`}
+                data-testid='list-link'
+              >
+                <LuList aria-label='List layout' data-testid='list-button' />
               </Link>
             </Button>
           </div>

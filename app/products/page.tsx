@@ -12,19 +12,3 @@ async function ProductsPage({
 }
 
 export default ProductsPage;
-
-// import ProductsClient from "@/components/products/ProductsClient";
-// function ProductsPage({
-//   searchParams,
-// }: {
-//   searchParams: { layout?: string; search?: string };
-// }) {
-//   return (
-//     <ProductsClient
-//       initialLayout={searchParams.layout}
-//       initialSearch={searchParams.search}
-//     />
-//   );
-// }
-
-// export default ProductsPage;

@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Card, CardContent } from "@/components/ui/card";
 import { Product } from "@prisma/client";
 import Image from "next/image";
-import FavoriteToggleButton from "./FavoriteToggleButton";
+import FavoriteToggleButton from "@/components/products/FavoriteToggleButton";
 function ProductsList({ products }: { products: Product[] }) {
   return (
     <div className='mt-12 grid gap-y-8'>
@@ -22,7 +22,7 @@ function ProductsList({ products }: { products: Product[] }) {
                       alt={name}
                       fill
                       sizes='(max-width:768px) 100vw,(max-width:1200px) 50vw,33vw'
-                      priority
+                      priority={true}
                       className='w-full rounded-md object-cover'
                     />
                   </div>
