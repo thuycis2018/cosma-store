@@ -1,11 +1,11 @@
 "use client";
 import { useState } from "react";
-import SelectProductQuantity from "../single-product/SelectProductQuantity";
-import { Mode } from "../single-product/SelectProductQuantity";
-import FormContainer from "../form/FormContainer";
-import { SubmitButton } from "../form/Buttons";
+import SelectProductQuantity from "@/components/single-product/SelectProductQuantity";
+import { Mode } from "@/components/single-product/SelectProductQuantity";
+import FormContainer from "@/components/form/FormContainer";
+import { SubmitButton } from "@/components/form/Buttons";
 import { removeCartItemAction, updateCartItemAction } from "@/utils/actions";
-import { useToast } from "../ui/use-toast";
+import { useToast } from "@/components/ui/use-toast";
 
 function ThirdColumn({ quantity, id }: { quantity: number; id: string }) {
   const [qty, setQty] = useState(quantity);

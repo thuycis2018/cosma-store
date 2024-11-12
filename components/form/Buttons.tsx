@@ -49,9 +49,9 @@ export const IconButton = ({ actionType }: { actionType: actionType }) => {
   const renderIcon = () => {
     switch (actionType) {
       case "edit":
-        return <LuPenSquare />;
+        return <LuPenSquare data-testid='LuPenSquare' />;
       case "delete":
-        return <LuTrash2 />;
+        return <LuTrash2 data-testid='LuTrash2' />;
       default:
         const never: never = actionType;
         throw new Error(`Invalid action type: ${never}`);
@@ -80,7 +80,7 @@ export const CardSignInButton = () => {
         className='p-2 cursor-pointer'
         asChild
       >
-        <BsHandThumbsUp />
+        <BsHandThumbsUp data-testid='BsHandThumbsUp' />
       </Button>
     </SignInButton>
   );
@@ -99,9 +99,9 @@ export const CardSubmitButton = ({ isFavorite }: { isFavorite: boolean }) => {
       {pending ? (
         <ReloadIcon className=' animate-spin' />
       ) : isFavorite ? (
-        <BsFillHandThumbsUpFill />
+        <BsFillHandThumbsUpFill data-testid='BsFillHandThumbsUpFill' />
       ) : (
-        <BsHandThumbsUp />
+        <BsHandThumbsUp data-testid='BsHandThumbsUp' />
       )}
     </Button>
   );
