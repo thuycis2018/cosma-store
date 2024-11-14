@@ -131,8 +131,11 @@ export default function ConsentBanner() {
               checked={checkboxState.necessary}
               onChange={() => handleCheckboxChange("necessary")}
               className='mr-2'
+              aria-labelledby='necessary'
             />
-            <label className='text-xs'>Necessary</label>
+            <label id='necessary' className='text-xs'>
+              Necessary
+            </label>
           </div>
           <div className='flex items-center'>
             <input
@@ -140,8 +143,11 @@ export default function ConsentBanner() {
               checked={checkboxState.analytics}
               onChange={() => handleCheckboxChange("analytics")}
               className='mr-2'
+              aria-labelledby='analytics'
             />
-            <label className='text-xs'>Analytics</label>
+            <label id='analytics' className='text-xs'>
+              Analytics
+            </label>
           </div>
           <div className='flex items-center'>
             <input
@@ -149,8 +155,11 @@ export default function ConsentBanner() {
               checked={checkboxState.marketing}
               onChange={() => handleCheckboxChange("marketing")}
               className='mr-2'
+              aria-labelledby='marketing'
             />
-            <label className='text-xs'>Marketing</label>
+            <label id='marketing' className='text-xs'>
+              Marketing
+            </label>
           </div>
           <div className='flex items-center'>
             <input
@@ -158,8 +167,11 @@ export default function ConsentBanner() {
               checked={checkboxState.preferences}
               onChange={() => handleCheckboxChange("preferences")}
               className='mr-2'
+              aria-labelledby='preferences'
             />
-            <label className='text-xs'>Preferences</label>
+            <label id='preferences' className='text-xs'>
+              Preferences
+            </label>
           </div>
         </form>
         <div className='flex justify-center gap-2 text-xs'>

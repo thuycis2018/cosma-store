@@ -6,7 +6,7 @@ function SectionTitle({ text }: { text: string }) {
       <h2 className='text-3xl font-medium tracking-wider capitalize mb-8'>
         {text}
       </h2>
-      <Separator />
+      <Separator role='separator' />
     </div>
   );
 }
