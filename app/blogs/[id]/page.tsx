@@ -1,4 +1,4 @@
-import BreadCrumbs from "@/components/single-blog/BreadCrums";
+import BreadCrumbs from "@/components/single-blog/BreadCrumbs";
 import { fetchSingleBlog } from "@/utils/actions";
 
 async function BlogPage({ params }: { params: { id: string } }) {

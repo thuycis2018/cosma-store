@@ -15,9 +15,9 @@ function Rating({ rating }: { rating: number }) {
           isFilled ? "text-primary" : "text-gray-400"
         }`;
         return isFilled ? (
-          <FaStar className={className} key={i} />
+          <FaStar className={className} key={i} data-testid='FaStar' />
         ) : (
-          <FaRegStar className={className} key={i} />
+          <FaRegStar className={className} key={i} data-testid='FaRegStar' />
         );
       })}
     </div>
