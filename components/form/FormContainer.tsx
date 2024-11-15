@@ -23,6 +23,10 @@ function FormContainer({
       toast({ description: state.message });
     }
   }, [state]);
-  return <form action={formAction}>{children}</form>;
+  return (
+    <form action={formAction} role='form'>
+      {children}
+    </form>
+  );
 }
 export default FormContainer;
