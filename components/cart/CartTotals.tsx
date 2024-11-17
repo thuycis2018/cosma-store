@@ -1,10 +1,9 @@
 import { Card, CardTitle } from "@/components/ui/card";
-import { Separator } from "@/components/ui/separator";
-import { formatCurrency } from "@/utils/format";
 import { createOrderAction } from "@/utils/actions";
 import FormContainer from "@/components/form/FormContainer";
 import { SubmitButton } from "@/components/form/Buttons";
 import { Cart } from "@prisma/client";
+import CartTotalRow from "@/components/cart/CartTotalRow";
 
 function CartTotals({ cart }: { cart: Cart }) {
   const { cartTotal, shipping, tax, orderTotal } = cart;
@@ -22,26 +21,6 @@ function CartTotals({ cart }: { cart: Cart }) {
         <SubmitButton text='Place Order' className='w-full mt-8' />
       </FormContainer>
     </div>
-  );
-}
-
-function CartTotalRow({
-  label,
-  amount,
-  lastRow,
-}: {
-  label: string;
-  amount: number;
-  lastRow?: boolean;
-}) {
-  return (
-    <>
-      <p className='flex justify-between text-sm'>
-        <span>{label}</span>
-        <span>{formatCurrency(amount)}</span>
-      </p>
-      {lastRow ? null : <Separator className='my-2' />}
-    </>
   );
 }
 
