@@ -1,6 +1,6 @@
 import Container from "../global/Container";
 import CartButton from "./CartButton";
-import DarkMode from "./DarkMode";
+import ThemeToggle from "./ThemeToggle";
 import LinksDropdown from "./LinksDropdown";
 import Logo from "./Logo";
 //import NavSearch from "./NavSearch";
@@ -11,7 +11,7 @@ function Navbar() {
       <Container className='flex flex-col sm:flex-row sm:justify-between sm:items-center py-8 gap-4 sm:gap-1'>
         <div className='flex gap-4 items-center'>
           <Logo />
-          <DarkMode />
+          <ThemeToggle />
         </div>
         <div className='flex gap-4 items-center'>
           <CartButton />
