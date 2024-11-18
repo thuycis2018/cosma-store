@@ -25,7 +25,7 @@ export default function CheckoutPage() {
       cartId: cartId,
     });
     return response.data.clientSecret;
-  }, []);
+  }, [orderId, cartId]);
 
   const options = { fetchClientSecret };
 
