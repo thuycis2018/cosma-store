@@ -23,14 +23,14 @@ export const FirstColumn = ({
 };
 export const SecondColumn = ({
   name,
-  productId,
+  slug,
 }: {
   name: string;
-  productId: string;
+  slug: string;
 }) => {
   return (
     <div className=' sm:w-48'>
-      <Link href={`/products/${productId}`}>
+      <Link href={`/products/${slug}`}>
         <h3 className='capitalize font-medium hover:underline'>{name}</h3>
       </Link>
     </div>

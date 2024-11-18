@@ -2,8 +2,8 @@ import { render, screen, fireEvent } from "@testing-library/react";
 import Navbar from "@/components/navbar/Navbar";
 
 jest.mock("@/components/navbar/Logo", () => () => <div>Logo</div>);
-jest.mock("@/components/navbar/DarkMode", () => () => (
-  <button>DarkMode</button>
+jest.mock("@/components/navbar/ThemeToggle", () => () => (
+  <button>ThemeToggle</button>
 ));
 jest.mock("@/components/navbar/CartButton", () => () => <button>Cart</button>);
 jest.mock("@/components/navbar/LinksDropdown", () => () => (
@@ -15,7 +15,7 @@ describe("Navbar", () => {
     render(<Navbar />);
 
     expect(screen.getByText("Logo")).toBeInTheDocument();
-    expect(screen.getByText("DarkMode")).toBeInTheDocument();
+    expect(screen.getByText("ThemeToggle")).toBeInTheDocument();
     expect(screen.getByText("Cart")).toBeInTheDocument();
     expect(screen.getByText("Links")).toBeInTheDocument();
   });

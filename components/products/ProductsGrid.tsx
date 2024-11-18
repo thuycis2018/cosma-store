@@ -9,12 +9,12 @@ function ProductsGrid({ products }: { products: Product[] }) {
   return (
     <div className='pt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-3'>
       {products.map((product) => {
-        const { name, price, image } = product;
+        const { name, price, image, slug } = product;
         const productId = product.id;
         const dollarsAmount = formatCurrency(price);
         return (
           <article key={productId} className='group relative'>
-            <Link href={`/products/${productId}`}>
+            <Link href={`/products/${slug}`}>
               <Card className='transform group-hover:shadow-xl transition-shadow duration-500'>
                 <CardContent className='p-4'>
                   <div className='relative h-64 md:h-48 rounded overflow-hidden '>

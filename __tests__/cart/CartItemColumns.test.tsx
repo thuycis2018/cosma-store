@@ -25,7 +25,7 @@ describe("FirstColumn Component", () => {
 
 describe("SecondColumn Component", () => {
   it("renders the link with product name", () => {
-    render(<SecondColumn name='Product Name' productId='123' />);
+    render(<SecondColumn name='Product Name' slug='123' />);
     const link = screen.getByTestId("link");
     expect(link).toBeInTheDocument();
     expect(link).toHaveAttribute("href", "/products/123");

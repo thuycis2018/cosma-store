@@ -35,12 +35,12 @@ async function ItemsPage() {
         </TableHeader>
         <TableBody>
           {items.map((item) => {
-            const { id: productId, name, company, price } = item;
+            const { id: productId, name, company, price, slug } = item;
             return (
               <TableRow key={productId}>
                 <TableCell>
                   <Link
-                    href={`/products/${productId}`}
+                    href={`/products/${slug}`}
                     className='underline text-muted-foreground tracking-wide capitalize'
                   >
                     {name}

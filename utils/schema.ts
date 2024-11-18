@@ -10,6 +10,14 @@ export const productSchema = z.object({
       message: "name must be less than 100 characters.",
     }),
   company: z.string(),
+  slug: z
+    .string()
+    .min(2, {
+      message: "name must be at least 2 characters.",
+    })
+    .max(50, {
+      message: "name must be less than 50 characters.",
+    }),
   featured: z.coerce.boolean(),
   price: z.coerce.number().int().min(0, {
     message: "price must be a positive number.",

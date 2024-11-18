@@ -88,6 +88,18 @@ export const fetchSingleProduct = async (productId: string) => {
   return product;
 };
 
+export const fetchSingleProductBySlug = async (slug: string) => {
+  const product = await db.product.findUnique({
+    where: {
+      slug: slug,
+    },
+  });
+  if (!product) {
+    redirect("/products");
+  }
+  return product;
+};
+
 export const createProductAction = async (
   prevState: any,
   formData: FormData
@@ -391,6 +403,19 @@ const fetchProduct = async (productId: string) => {
   const product = await db.product.findUnique({
     where: {
       id: productId,
+    },
+  });
+
+  if (!product) {
+    throw new Error("Product not found");
+  }
+  return product;
+};
+
+const fetchProductBySlug = async (slug: string) => {
+  const product = await db.product.findUnique({
+    where: {
+      slug: slug,
     },
   });
 

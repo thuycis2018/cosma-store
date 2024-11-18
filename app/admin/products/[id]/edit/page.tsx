@@ -16,7 +16,7 @@ import { text } from "stream/consumers";
 async function EditProductPage({ params }: { params: { id: string } }) {
   const { id } = params;
   const product = await fetchAdminProductDetails(id);
-  const { name, company, description, featured, price } = product;
+  const { name, company, description, featured, price, slug } = product;
   return (
     <section>
       <h1 className='text-2xl font-semibold mb-8 capitalize'>update product</h1>
@@ -45,6 +45,13 @@ async function EditProductPage({ params }: { params: { id: string } }) {
               name='company'
               label='company'
               defaultValue={company}
+            />
+
+            <FormInput
+              type='text'
+              name='slug'
+              label='friendly url'
+              defaultValue={slug}
             />
 
             <PriceInput defaultValue={price} />

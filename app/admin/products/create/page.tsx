@@ -17,6 +17,7 @@ function CreateProduct() {
           <div className='grid gap-4 md:grid-cols-2 my-4'>
             <FormInput type='text' name='name' label='name' />
             <FormInput type='text' name='company' label='company' />
+            <FormInput type='text' name='slug' label='friendly url' />
             <PriceInput />
             <ImageInput />
           </div>

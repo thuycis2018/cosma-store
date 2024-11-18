@@ -12,14 +12,21 @@ function CartItemsList({ cartItems }: { cartItems: CartItemWithProduct[] }) {
     <div>
       {cartItems.map((cartItem) => {
         const { id, quantity } = cartItem;
-        const { id: productId, image, name, company, price } = cartItem.product;
+        const {
+          id: productId,
+          image,
+          name,
+          company,
+          price,
+          slug,
+        } = cartItem.product;
         return (
           <Card
             key={id}
             className='flex flex-col gap-y-4 md:flex-row flex-wrap p-6 mb-8 gap-x-4'
           >
             <FirstColumn image={image} name={name} />
-            <SecondColumn name={name} productId={productId} />
+            <SecondColumn name={name} slug={slug} />
             <ThirdColumn id={id} quantity={quantity} />
             <FourthColumn price={price} />
           </Card>

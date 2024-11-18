@@ -3,7 +3,7 @@
 // node prisma/seed.js blogs
 const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
-const items = require('./blogs.json');
+let items = require('./blogs.json');
 const tableName = process.argv[2];
 
 if (tableName === 'products') {
