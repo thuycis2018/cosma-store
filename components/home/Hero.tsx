@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import HeroCarousel from "./HeroCarousel";
+import Animation from "./Animation";
 
 function Hero() {
   return (
@@ -21,7 +21,9 @@ function Hero() {
           <Link href='/products'>Our Offers</Link>
         </Button>
       </div>
-      <HeroCarousel data-testid='hero-carousel' />
+      <div className='hidden lg:block'>
+        <Animation />
+      </div>
     </section>
   );
 }

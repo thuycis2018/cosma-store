@@ -1,9 +1,10 @@
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import Hero from "@/components/home/Hero";
+import Animation from "@/components/home/Animation";
 
-jest.mock("@/components/home/HeroCarousel", () => () => (
-  <div data-testid='hero-carousel'>Mocked HeroCarousel</div>
+jest.mock("@/components/home/Animation", () => () => (
+  <div data-testid='animation'>Mocked Animation</div>
 ));
 
 describe("Hero Component", () => {
@@ -32,9 +33,9 @@ describe("Hero Component", () => {
     expect(button).toHaveAttribute("href", "/products");
   });
 
-  it("renders the HeroCarousel component", () => {
-    render(<Hero />);
-    const heroCarousel = screen.getByTestId("hero-carousel");
-    expect(heroCarousel).toBeInTheDocument();
+  it("renders the Animation component", () => {
+    render(<Animation />);
+    const animation = screen.getByTestId("animation");
+    expect(animation).toBeInTheDocument();
   });
 });
