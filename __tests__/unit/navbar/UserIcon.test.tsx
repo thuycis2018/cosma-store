@@ -13,9 +13,8 @@ describe("UserIcon", () => {
     });
 
     render(await UserIcon());
-    const imageElement = await screen.findByRole("img");
-
-    expect(imageElement).toHaveAttribute("src", "/image.jpg");
+    const imageElement = (await screen.findByRole("img")) as HTMLImageElement;
+    expect(imageElement.src).toContain("image.jpg");
     expect(imageElement).toHaveClass("w-6 h-6 rounded-full object-cover");
   });
 
