@@ -1,6 +1,9 @@
 import { test, expect } from "@playwright/test";
 
 test.describe("Add to cart", () => {
+  test.beforeEach("empty cart", async ({ page }) => {
+    await page.goto("/api/empty-cart");
+  });
   test("should add to cart and update cart quantity icon", async ({ page }) => {
     await page.goto("/products/premium-package");
     await expect(

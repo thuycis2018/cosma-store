@@ -12,12 +12,13 @@ async function UserIcon() {
         height={40}
         src={profileImage}
         className='w-6 h-6 rounded-full object-cover'
+        data-testid='logged-in-user'
       />
     );
   return (
     <LuUser2
       className='w-6 h-6 bg-primary rounded-full text-white'
-      data-testid='LuUser2'
+      data-testid='logged-in-user'
     />
   );
 }

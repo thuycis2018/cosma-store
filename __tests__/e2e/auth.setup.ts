@@ -7,18 +7,18 @@ const authFile = path.join(__dirname, "../../playwright/.auth/user.json");
 // npx playwright test --project=setup
 setup("authenticate", async ({ page }) => {
   await page.goto("/");
-  const loginMenu = page
-    .locator("div")
-    .filter({ hasText: /^0$/ })
-    .getByRole("button");
+  const userIcon = await page.getByTestId("logged-in-user");
 
-  if (await loginMenu.isVisible()) {
+  if (!userIcon.isVisible()) {
+    console.log("trying to login");
+    // open menu
     await page
       .locator("div")
       .filter({ hasText: /^0$/ })
       .getByRole("button")
       .click();
 
+    // click login
     await page.getByRole("button", { name: "Login" }).click();
     if (!process.env.EMAIL || !process.env.PASSWORD) {
       throw new Error("EMAIL environment variable is not defined");
@@ -37,4 +37,5 @@ setup("authenticate", async ({ page }) => {
     // End of authentication steps.
     await page.context().storageState({ path: authFile });
   }
+  console.log("done authenticating");
 });

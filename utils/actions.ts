@@ -535,6 +535,27 @@ export const updateCart = async (cart: Cart) => {
   return { currentCart, cartItems };
 };
 
+export const emptyCart = async () => {
+  const user = await getAuthUser();
+  try {
+    const cart = await fetchOrCreateCart({
+      userId: user.id,
+      errorOnFailure: true,
+    });
+    await db.cartItem.deleteMany({
+      where: {
+        cartId: cart.id,
+      },
+    });
+
+    await updateCart(cart);
+    revalidatePath("/cart");
+    return { message: "All items removed from cart" };
+  } catch (error) {
+    return renderError(error);
+  }
+};
+
 export const addToCartAction = async (prevState: any, formData: FormData) => {
   const user = await getAuthUser();
   try {
