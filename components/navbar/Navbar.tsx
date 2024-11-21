@@ -8,13 +8,13 @@ import Logo from "./Logo";
 function Navbar() {
   return (
     <nav className='border-b shadow-md'>
-      <Container className='flex flex-col sm:flex-row sm:justify-between sm:items-center py-8 gap-4 sm:gap-1'>
-        <div className='flex gap-4 items-center'>
+      <Container className='flex flex-row justify-between items-center py-8 gap-4'>
+        <div>
           <Logo />
-          <ThemeToggle />
         </div>
         <div className='flex gap-4 items-center'>
           <CartButton />
+          <ThemeToggle />
           <LinksDropdown />
         </div>
       </Container>
