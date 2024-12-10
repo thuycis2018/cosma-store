@@ -1,6 +1,5 @@
 import Link from "next/link";
-import { Button } from "../ui/button";
-import { VscCode } from "react-icons/vsc";
+import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import logo from "@/app/logo.png";
 

@@ -3,7 +3,7 @@ import path from "path";
 import * as dotenv from "dotenv";
 dotenv.config();
 
-const authFile = path.join(__dirname, "../../playwright/.auth/user.json");
+const authFile = path.join(__dirname, "@/playwright/.auth/user.json");
 // npx playwright test --project=setup
 setup("authenticate", async ({ page }) => {
   await page.goto("/");

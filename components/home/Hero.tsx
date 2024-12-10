@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import Animation from "./Animation";
+import Animation from "@/components/home/Animation";
 
 function Hero() {
   return (

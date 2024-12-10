@@ -1,8 +1,8 @@
-import Container from "../global/Container";
-import CartButton from "./CartButton";
-import ThemeToggle from "./ThemeToggle";
-import LinksDropdown from "./LinksDropdown";
-import Logo from "./Logo";
+import Container from "@/components/global/Container";
+import CartButton from "@/components/navbar/CartButton";
+import ThemeToggle from "@/components/navbar/ThemeToggle";
+import LinksDropdown from "@/components/navbar/LinksDropdown";
+import Logo from "@/components/navbar/Logo";
 //import NavSearch from "./NavSearch";
 // import { Suspense } from "react";
 function Navbar() {
